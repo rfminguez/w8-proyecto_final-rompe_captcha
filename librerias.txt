@@ -1,0 +1,8 @@
+# Esto habría que pasarlo a un requirements.txt normalizado
+pip3 install pytesseract
+pip3 install captcha
+pip3 install opencv-python
+pip3 install imutils
+
+sudo apt update
+sudo apt install tesseract-ocr
