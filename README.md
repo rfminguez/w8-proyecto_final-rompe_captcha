@@ -21,7 +21,13 @@ Howtos y tutoriales:
 	https://github.com/scnuhealthy/cnn_keras_captcha
 	https://www.novatec-gmbh.de/en/blog/deep-learning-for-end-to-end-captcha-solving/
 
-Kaggle:
+OpenCV y pytesseract:
+https://nanonets.com/blog/ocr-with-tesseract/
+
+Image processing with OpenCV:
+https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_table_of_contents_imgproc/py_table_of_contents_imgproc.html
+
+Proyectos Kaggle:
 	https://www.kaggle.com/fournierp/captcha-version-2-images?
 	https://www.kaggle.com/aakashnain/building-a-captcha-ocr-in-tf2-0
 	
