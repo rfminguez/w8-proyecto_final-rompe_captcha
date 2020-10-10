@@ -41,15 +41,16 @@ def main():
     n_captchas = args.n_captchas
 
     if dir_exists(dir):
-        borrar_dir = input("El directorio ya existe. Lo borro? [Y/n]")
+        borrar_dir = input(f"El directorio {dir} ya existe. Lo borro? [Y/n]: ")
         if borrar_dir in "Yy":
             delete_directory(dir)
 
     if not dir_exists(dir):
+        print(f"Creando el directorio {dir}")
         create_directory(dir)
 
     for i in range(n_captchas):
-        print(i)
+        print(f"Generando imagen {i + 1}", end='\r')
         captcha = Captcha(output_dir = dir)
         captcha.save()
 
