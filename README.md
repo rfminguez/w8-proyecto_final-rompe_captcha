@@ -1,6 +1,48 @@
 # Proyecto Final del Bootcamp
 Intento de romper captchas usando Machine Learning.
 
+Para simplificar el problema:
+- voy a limitarme a captchas de 4 caracteres alfanuméricos.
+- letras mayúsculas y números entre 1 y 9 (el "0" es imposible de distinguir el "0" de una "o" mayúscula incluso para el ojo humano).
+- limitado a un solo tipo de fuente (los captchas suelen utilizar distintos tipos de fuente para hacer más difícil distinguir los caracteres).
+
+- estos captchas los generaré usando la de python
+    https://pypi.org/project/captcha/
+
+
+# Preparar el set de datos
+Separar el captcha en 4 trozos correspondientes a los 4 caracteres.
+
+Cada uno de esos caracteres (imágenes) para todas las imágenes seleccionadas serán con lo que se entrene la red neuronal. El objetivo es conseguir diferentes variaciones de cada letra o número.
+
+Esto no es tan fácil como separar la imagen en trozos del mismo tamaño porque los caracteres en un captcha las letras tienen diferentes tamaños, aparecen giradas, y desplazadas en posiciones aleatorias de modo que en muchos casos se solapan.
+
+Esto lo haré usando la librería OpenCV.
+
+
+# Entrenar Algoritmo Machine Learning
+
+
+# TO-DOs
+
+- TO-DO incluir letras mayúsculas y minúsculas (algunas, como la "v", "w", "x", "y" u "o" son muy difíciles de distinguir incluso para el ojo humano). También es muy difícil distinguir "1" de "l" minúscula.
+- TO-DO captchas con distintos tipos de fuentes.
+- TO-DO captchas con un número variable de caracteres.
+- TO-DO incluir un interfaz API y/o gráfico.
+
+- las imágenes se guardan en el directorio `input` como gráficos .PNG, el nombre del archivo es el texto que está oculto en la imagen.
+- a partir de las imágenes se separan las letras que se utilizarán como entrenamiento para una red neuronal.
+
+
+
+
+
+
+
+
+
+--------------
+
 Keras vs Tensorflow vs Spark:
 https://www.edureka.co/blog/keras-vs-tensorflow-vs-pytorch/
 
