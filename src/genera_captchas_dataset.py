@@ -43,6 +43,7 @@ def main():
     if dir_exists(dir):
         borrar_dir = input(f"El directorio {dir} ya existe. Lo borro? [Y/n]: ")
         if borrar_dir in "Yy":
+            print(f"Borrando el directorio {dir}")
             delete_directory(dir)
 
     if not dir_exists(dir):
@@ -54,7 +55,7 @@ def main():
         captcha = Captcha(output_dir = dir)
         captcha.save()
 
-    print(f"Generados {n_captchas} captchas en el directorio {dir}.")
+    print(f"Generados {n_captchas} captchas en el directorio {dir}")
 
 
 if __name__ == '__main__':
