@@ -4,6 +4,7 @@ pip3 install captcha
 pip3 install opencv-python
 pip3 install imutils
 pip3 install keras
+pip3 install TensorFlow
 
 sudo apt update
 sudo apt install tesseract-ocr
