@@ -41,6 +41,14 @@ def get_regions(contours):
 
     return regions
 
+def adjust_regions_by_number(regions, target_number_of_regions):
+    while len(regions) < target_number_of_regions:
+        largest_region = get_largest_region_by_area_size(regions)
+        new_regions = divide_region_by_width(largest_region)
+        regions += new_regions
+        regions.remove(largest_region)
+    return regions
+
 def get_sorted_regions_by_area_size(regions):
     '''
     recibe:   Una lista con regiones.

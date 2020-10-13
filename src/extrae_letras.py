@@ -48,17 +48,15 @@ def main():
 
         # Estamos tratando captchas de 4 letras.
         # Si recibimos menos de 4 regiones seguramente se han juntado varias letras en una sola región que hay que dividir.
-        while len(regions) < 4:
-            largest_region = tb.get_largest_region_by_area_size(regions)
-            new_regions = tb.divide_region_by_width(largest_region)
-            regions += new_regions
-            regions.remove(largest_region)
+        regions = tb.adjust_regions_by_number(regions, 4)
 
         # Guardo cada región como imagen
         for region, letter in zip(tb.get_sorted_regions_by_coord_x(regions), tb.get_captcha_text_from_filename(captcha_image_filename)):
             x, y, w, h = region
             
-            letter_image = image[y:y + h, x:x + w]
+            #letter_image = image[y:y + h, x:x + w]
+            letter_image = thresholded_image[y:y + h, x:x + w]
+
             tb.save_letter_image(letter_image, letter, output_folder = letter_destination_folder)
 
             print(f"Imagen para la letra {letter} guardada.")

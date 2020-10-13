@@ -3,10 +3,10 @@ Intento de romper captchas usando Machine Learning.
 
 Para simplificar el problema:
 - voy a limitarme a captchas de 4 caracteres alfanuméricos.
-- letras mayúsculas y números entre 1 y 9 (el "0" es imposible de distinguir el "0" de una "o" mayúscula incluso para el ojo humano).
-- limitado a un solo tipo de fuente (los captchas suelen utilizar distintos tipos de fuente para hacer más difícil distinguir los caracteres).
+- letras mayúsculas y números entre 1 y 9 (el "0" es difícil de distinguir de una "O" mayúscula incluso para el ojo humano).
+- limitado a un solo tipo de fuente (algunas herramientas pueden utilizar distintos tipos de fuente para dificultar distinguir los caracteres).
 
-- estos captchas los generaré usando la de python
+- estos captchas los generaré usando este módulo de Python.
     https://pypi.org/project/captcha/
 
 
@@ -24,15 +24,15 @@ Esto lo haré usando la librería OpenCV.
 
 
 # TO-DOs
+- Este ejemplo es muy dependiente de los gráficos que genera el módulo `captcha` de Python.
+  Habría que ver cómo se puede estrapolar a otras herramientas que generan estas imágenes.
+  Una de las ideas que tengo es volver a entrenar el modelo con un set de datos que incorpore ejemplos de estas herramientas.
 
-- TO-DO incluir letras mayúsculas y minúsculas (algunas, como la "v", "w", "x", "y" u "o" son muy difíciles de distinguir incluso para el ojo humano). También es muy difícil distinguir "1" de "l" minúscula.
-- TO-DO captchas con distintos tipos de fuentes.
+- Automatizar en un script la descarga y procesamiento de una imagen desde una página web que use `captchas` usando *web scraping*.
+
+- TO-DO incluir letras mayúsculas y minúsculas (algunas, como la "v", "w", "x", "y" u "o" son muy difíciles de distinguir incluso para el ojo humano). También es muy difícil distinguir el número "1" de la letra "l" minúscula o el número "0" de la letra "O" mayúscula.
 - TO-DO captchas con un número variable de caracteres.
-- TO-DO incluir un interfaz API y/o gráfico.
-
-- las imágenes se guardan en el directorio `input` como gráficos .PNG, el nombre del archivo es el texto que está oculto en la imagen.
-- a partir de las imágenes se separan las letras que se utilizarán como entrenamiento para una red neuronal.
-
+- TO-DO incluir un interfaz gráfico o programar una API para subir imágenes.
 
 
 
