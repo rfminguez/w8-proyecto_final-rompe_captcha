@@ -1,29 +1,67 @@
-# Proyecto Final del Bootcamp
-Intento de romper captchas usando Machine Learning.
+# Introducción
+Un `captcha` es una herramienta que se utiliza para distinguir si un usuario es una máquina o un humano. Habitualmente son imágenes que ocultan un texto deformado, desplazado y al que se añade ruido, que es relativamente fácil de intepretar para un ser humano pero muy difícil para una máquina usando herramientas OCR.
 
-Para simplificar el problema:
-- voy a limitarme a captchas de 4 caracteres alfanuméricos.
-- letras mayúsculas y números entre 1 y 9 (el "0" es difícil de distinguir de una "O" mayúscula incluso para el ojo humano).
-- limitado a un solo tipo de fuente (algunas herramientas pueden utilizar distintos tipos de fuente para dificultar distinguir los caracteres).
+![ejemplo](/static/images/8J90.png)
 
-- estos captchas los generaré usando este módulo de Python.
-    https://pypi.org/project/captcha/
+Este es el proyecto final para el bootcamp de Data de IronHack. El objetivo es extraer el texto oculto en imágenes `captcha` usando técnicas de análisis de imagen y Machine Learning (concretamente Redes Neuronales Convolucionales). 
 
+Se trata de una PoC, limitada en el alcance para reducir la complejidad del problema y hacerla abarcable en una semana:
+* resolver captchas de 4 caracteres.
+* letras mayúsculas y números entre 1 y 9 (el "0" es difícil de distinguir de una "O" mayúscula incluso para el ojo humano). En total son 36 caracteres. 
+* imágenes generadas con el módulo `capcha` de Python (`https://pypi.org/project/captcha/`).
 
-# Preparar el set de datos
-Separar el captcha en 4 trozos correspondientes a los 4 caracteres.
+Este proyecto está dividido en varias partes:
 
-Cada uno de esos caracteres (imágenes) para todas las imágenes seleccionadas serán con lo que se entrene la red neuronal. El objetivo es conseguir diferentes variaciones de cada letra o número.
+# Preparación del Set de Datos y Entrenamiento de la Red Neuronal
+Para generar el set de datos (i.e. el conjunto de `captchas`) que usaré para entrenar el modelo de Machine Learning) he creado los siguientes scripts que están dentro del directorio `src`:
 
-Esto no es tan fácil como separar la imagen en trozos del mismo tamaño porque los caracteres en un captcha las letras tienen diferentes tamaños, aparecen giradas, y desplazadas en posiciones aleatorias de modo que en muchos casos se solapan.
+* `genera_captchas_dataset.py`: genera un conjunto de captchas de 4 letras. Puede recibir como argumento:
+ * `-n`: número de `captchas` que va a generar.
+ * `-d`: directorio donde se van a guardar.
+ 
+* `extrae_letras.py`: a partir de un conjunto de `captchas` guardados en un directorio extrae para cada uno cuatro regiones (una por cada carácter). Puede recibir estos argumentos.
+ * `-i`: directorio donde están los `captchas`.
+ * `-o`: directorio donde se guardan las letras extraídas.
+ 
+El proceso de crear el set de datos de entrenamiento consta de dos pasos:
+1. generar el set de captchas. Por ejemplo, en este caso creo 10.000 captchas:
+```
+cd src
+python3 genera_captchas_dataset.py -n 10000 -d ../input/captchas_dataset/train_data/
+```
 
-Esto lo haré usando la librería OpenCV.
+2. extraer los caracteres (regiones) de todos esos captchas:
+```
+cd src
+python3 extrae_letras.py -i ../input/captchas_dataset/train_data/ -o ../input/letter_dataset/training/
+```
 
+El código de estos scripts está separado en módulos que también están en el directorio `src`:
+* `extrae_letras_toolbox.py`: contiene funciones para extraer las regiones de cada `captcha` que contienen las letras.
+* `img_toolbox.py`: contiene funciones para trabajar con imágenes (usando sobre todo la librería `opencv`.
+* `mi_captcha.py`: contiene la clase *Captcha* que se instancia en `genera_captchas_dataset.py`.
 
-# Entrenar Algoritmo Machine Learning
+# Entrenamiento del Modelo de Machine Learning
+En el Jupyter Notebook `02 - Entrenamiento.ipynb` está el proceso de entrenamiento del modelo de Redes Neuronales.
 
+En resumen este modelo consta de:
+* 2 capas convolucionales.
+* 500 capas intermedias.
+* 1 capa de salida con 36 nodos (uno por cada posible carácter dentro de los `captchas`).
+
+Y utiliza como set de datos los caracteres extraídos de los `captchas` generados con los scripts descritos arriba.
+
+Para mejorar la legibilidad de estos notebooks he separado parte del código en un módulo dentro del directorio `src`:
+# Predicciones
+Extracción de las letras de uno o varios `captchas` que no están en el set de entrenamiento.
+
+Esto se hace dentro del Jupyter Notebook `03 - Captcha Text Prediction.ipynb`.
+* `predictions_toolbox.py`
 
 # TO-DOs
+Como he comentado
+- No limitarla a una sola librería generadora de `captchas`.
+- No limitarla en número de caracteres. Número variable de caracteres.
 - Este ejemplo es muy dependiente de los gráficos que genera el módulo `captcha` de Python.
   Habría que ver cómo se puede estrapolar a otras herramientas que generan estas imágenes.
   Una de las ideas que tengo es volver a entrenar el modelo con un set de datos que incorpore ejemplos de estas herramientas.
@@ -33,35 +71,20 @@ Esto lo haré usando la librería OpenCV.
 - TO-DO incluir letras mayúsculas y minúsculas (algunas, como la "v", "w", "x", "y" u "o" son muy difíciles de distinguir incluso para el ojo humano). También es muy difícil distinguir el número "1" de la letra "l" minúscula o el número "0" de la letra "O" mayúscula.
 - TO-DO captchas con un número variable de caracteres.
 - TO-DO incluir un interfaz gráfico o programar una API para subir imágenes.
+# Enlaces
+Para este proyecto he utilizado las siguientes fuentes de información:
 
+Otros proyectos similares:
+https://www.kaggle.com/fournierp/captcha-version-2-images?
+https://www.kaggle.com/aakashnain/building-a-captcha-ocr-in-tf2-0
+https://medium.com/@ageitgey/how-to-break-a-captcha-system-in-15-minutes-with-machine-learning-dbebb035a710
+https://github.com/JackonYang/captcha-tensorflow
+https://github.com/scnuhealthy/cnn_keras_captcha
+https://www.novatec-gmbh.de/en/blog/deep-learning-for-end-to-end-captcha-solving/
 
-
-
-
-
-
-
---------------
-
-Keras vs Tensorflow vs Spark:
-https://www.edureka.co/blog/keras-vs-tensorflow-vs-pytorch/
-
-
-TOPOLOGÍAS DE RED
-VGG:
-https://www.quora.com/What-is-the-VGG-neural-network
-
-VGG es una topología de Red Neuronal propuesta por Karen Simonyan y Andrew Zisserman del Oxford Robotics Institute en el año 2014.
-
-Esta topología consiguió muy buenos resultados en la competición  de reconocimiento de imágenes Large Scale Visual Recognition Challenge 2014.
-
-
-A HOMBROS DE GIGANTES:
-Howtos y tutoriales:
-	https://medium.com/@ageitgey/how-to-break-a-captcha-system-in-15-minutes-with-machine-learning-dbebb035a710
-	https://github.com/JackonYang/captcha-tensorflow
-	https://github.com/scnuhealthy/cnn_keras_captcha
-	https://www.novatec-gmbh.de/en/blog/deep-learning-for-end-to-end-captcha-solving/
+Artículos:
+https://medium.com/towards-artificial-intelligence/breaking-captcha-using-machine-learning-in-0-05-seconds-9feefb997694
+http://ceur-ws.org/Vol-1885/93.pdf
 
 OpenCV y pytesseract:
 https://nanonets.com/blog/ocr-with-tesseract/
@@ -69,19 +92,3 @@ https://nanonets.com/blog/ocr-with-tesseract/
 Image processing with OpenCV:
 https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_table_of_contents_imgproc/py_table_of_contents_imgproc.html
 
-Proyectos Kaggle:
-	https://www.kaggle.com/fournierp/captcha-version-2-images?
-	https://www.kaggle.com/aakashnain/building-a-captcha-ocr-in-tf2-0
-	
-
-Artículos:
-	https://medium.com/towards-artificial-intelligence/breaking-captcha-using-machine-learning-in-0-05-seconds-9feefb997694
-	http://ceur-ws.org/Vol-1885/93.pdf
-
-Basándome en estos enlaces:
-	https://deepmlblog.wordpress.com/2016/01/03/how-to-break-a-captcha-system/
-	https://github.com/deathlyface/recaptcha-dataset
-	https://github.com/JackonYang/captcha-tensorflow
-
-https://www.quora.com/What-is-the-VGG-neural-network
-https://www.edureka.co/blog/keras-vs-tensorflow-vs-pytorch/
