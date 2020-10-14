@@ -57,7 +57,10 @@ Esto se hace dentro del Jupyter Notebook `03 - Captcha Text Prediction.ipynb`.
 Para mejorar la legibilidad de estos notebooks he separado parte del código en un módulo dentro del directorio `src`: 
 * `predictions_toolbox.py`
 # TO-DOs
-Como he comentado este proyecto está limitado y tiene muchos áreas donde se puede mejorar. Por ejemplo se me ocurren:
+Como he comentado este proyecto está limitado y tiene muchos áreas donde se puede mejorar. La más importante:
+* Mejorar la precisión del modelo. En estos momentos resuelve correctamente aproximadamente el 50% de los captchas de test. Se me ocurre que esto puede mojorar aumentando los datos de entrenamiento o ajustando el algoritmo de Machine Learning usado.
+
+Una vez hecho esto, creo que sería interesante añadir nuevas funcionalidades:
 * No limitarla a una sola librería generadora de `captchas`. Ahora es muy dependiente y puede decirse que está *sobre-entrenado* para el módulo `captcha` de python. Tendría que probar a aumentar el set de datos de entrenamiento incorporando imágenes generadas con otras herramientas y probar si las predicciones mejoran.
 * No limitarla el número de caracteres. Habría que pensar una técnica para distinguir el número de caracteres que puede haber en un captcha. Por ejemplo, en este pdf comentan un par de técnicas que tendría que estudiar: [http://ceur-ws.org/Vol-1885/93.pdf].
 * Crear un script o un interfaz para automatizara la descarga y procesamiento de `captchas` usando *web scraping*.
