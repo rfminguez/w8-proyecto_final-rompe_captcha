@@ -68,6 +68,8 @@ Una vez hecho esto, creo que sería interesante añadir nuevas funcionalidades:
 Para este proyecto he utilizado las siguientes fuentes de información:
 * Otros proyectos similares:
 
+https://www.kaggle.com/kanncaa1/convolutional-neural-network-cnn-tutorial
+
 https://www.kaggle.com/fournierp/captcha-version-2-images\?
 
 https://www.kaggle.com/aakashnain/building-a-captcha-ocr-in-tf2-0
