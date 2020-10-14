@@ -16,12 +16,12 @@ Este proyecto está dividido en varias partes:
 Para generar el set de datos (i.e. el conjunto de `captchas`) que usaré para entrenar el modelo de Machine Learning) he creado los siguientes scripts que están dentro del directorio `src`:
 
 * `genera_captchas_dataset.py`: genera un conjunto de captchas de 4 letras. Puede recibir como argumento:
- * `-n`: número de `captchas` que va a generar.
- * `-d`: directorio donde se van a guardar.
+  * `-n`: número de `captchas` que va a generar.
+  * `-d`: directorio donde se van a guardar.
  
 * `extrae_letras.py`: a partir de un conjunto de `captchas` guardados en un directorio extrae para cada uno cuatro regiones (una por cada carácter). Puede recibir estos argumentos.
- * `-i`: directorio donde están los `captchas`.
- * `-o`: directorio donde se guardan las letras extraídas.
+  * `-i`: directorio donde están los `captchas`.
+  * `-o`: directorio donde se guardan las letras extraídas.
  
 El proceso de crear el set de datos de entrenamiento consta de dos pasos:
 1. generar el set de captchas. Por ejemplo, en este caso creo 10.000 captchas:
@@ -40,7 +40,6 @@ El código de estos scripts está separado en módulos que también están en el
 * `extrae_letras_toolbox.py`: contiene funciones para extraer las regiones de cada `captcha` que contienen las letras.
 * `img_toolbox.py`: contiene funciones para trabajar con imágenes (usando sobre todo la librería `opencv`.
 * `mi_captcha.py`: contiene la clase *Captcha* que se instancia en `genera_captchas_dataset.py`.
-
 # Entrenamiento del Modelo de Machine Learning
 En el Jupyter Notebook `02 - Entrenamiento.ipynb` está el proceso de entrenamiento del modelo de Redes Neuronales.
 
@@ -49,46 +48,41 @@ En resumen este modelo consta de:
 * 500 capas intermedias.
 * 1 capa de salida con 36 nodos (uno por cada posible carácter dentro de los `captchas`).
 
-Y utiliza como set de datos los caracteres extraídos de los `captchas` generados con los scripts descritos arriba.
-
-Para mejorar la legibilidad de estos notebooks he separado parte del código en un módulo dentro del directorio `src`:
+Usa como set de datos los caracteres extraídos de los `captchas` generados con los scripts descritos arriba.
 # Predicciones
 Extracción de las letras de uno o varios `captchas` que no están en el set de entrenamiento.
 
 Esto se hace dentro del Jupyter Notebook `03 - Captcha Text Prediction.ipynb`.
+
+Para mejorar la legibilidad de estos notebooks he separado parte del código en un módulo dentro del directorio `src`: 
 * `predictions_toolbox.py`
-
 # TO-DOs
-Como he comentado
-- No limitarla a una sola librería generadora de `captchas`.
-- No limitarla en número de caracteres. Número variable de caracteres.
-- Este ejemplo es muy dependiente de los gráficos que genera el módulo `captcha` de Python.
-  Habría que ver cómo se puede estrapolar a otras herramientas que generan estas imágenes.
-  Una de las ideas que tengo es volver a entrenar el modelo con un set de datos que incorpore ejemplos de estas herramientas.
-
-- Automatizar en un script la descarga y procesamiento de una imagen desde una página web que use `captchas` usando *web scraping*.
-
-- TO-DO incluir letras mayúsculas y minúsculas (algunas, como la "v", "w", "x", "y" u "o" son muy difíciles de distinguir incluso para el ojo humano). También es muy difícil distinguir el número "1" de la letra "l" minúscula o el número "0" de la letra "O" mayúscula.
-- TO-DO captchas con un número variable de caracteres.
-- TO-DO incluir un interfaz gráfico o programar una API para subir imágenes.
+Como he comentado este proyecto está limitado y tiene muchos áreas donde se puede mejorar. Por ejemplo se me ocurren:
+* No limitarla a una sola librería generadora de `captchas`. Ahora es muy dependiente y puede decirse que está *sobre-entrenado* para el módulo `captcha` de python. Tendría que probar a aumentar el set de datos de entrenamiento incorporando imágenes generadas con otras herramientas y probar si las predicciones mejoran.
+* No limitarla el número de caracteres. Habría que pensar una técnica para distinguir el número de caracteres que puede haber en un captcha. Por ejemplo, en este pdf comentan un par de técnicas que tendría que estudiar: [http://ceur-ws.org/Vol-1885/93.pdf].
+* Crear un script o un interfaz para automatizara la descarga y procesamiento de `captchas` usando *web scraping*.
 # Enlaces
 Para este proyecto he utilizado las siguientes fuentes de información:
+* Otros proyectos similares:
 
-Otros proyectos similares:
-https://www.kaggle.com/fournierp/captcha-version-2-images?
+https://www.kaggle.com/fournierp/captcha-version-2-images\?
+
 https://www.kaggle.com/aakashnain/building-a-captcha-ocr-in-tf2-0
+
 https://medium.com/@ageitgey/how-to-break-a-captcha-system-in-15-minutes-with-machine-learning-dbebb035a710
+
 https://github.com/JackonYang/captcha-tensorflow
+
 https://github.com/scnuhealthy/cnn_keras_captcha
+
 https://www.novatec-gmbh.de/en/blog/deep-learning-for-end-to-end-captcha-solving/
+* Artículos:
 
-Artículos:
 https://medium.com/towards-artificial-intelligence/breaking-captcha-using-machine-learning-in-0-05-seconds-9feefb997694
-http://ceur-ws.org/Vol-1885/93.pdf
 
-OpenCV y pytesseract:
+http://ceur-ws.org/Vol-1885/93.pdf
+* Documentación OpenCV y pytesseract:
+
 https://nanonets.com/blog/ocr-with-tesseract/
 
-Image processing with OpenCV:
 https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_table_of_contents_imgproc/py_table_of_contents_imgproc.html
-
