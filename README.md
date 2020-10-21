@@ -44,8 +44,8 @@ El código de estos scripts está separado en módulos que también están en el
 En el Jupyter Notebook `02 - Entrenamiento.ipynb` está el proceso de entrenamiento del modelo de Redes Neuronales.
 
 En resumen este modelo consta de:
-* 2 capas convolucionales.
-* 500 capas intermedias.
+* 2 capas convolucionales de 20 y 50 nodos.
+* 1 capa intermedia de 500 nodos.
 * 1 capa de salida con 36 nodos (uno por cada posible carácter dentro de los `captchas`).
 
 Usa como set de datos los caracteres extraídos de los `captchas` generados con los scripts descritos arriba.
