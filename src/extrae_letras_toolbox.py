@@ -1,6 +1,7 @@
 import cv2
 import re
 import os
+import numpy as np
 import datetime as dt
 
 
@@ -13,6 +14,20 @@ def get_captcha_text_from_filename(file_path):
 
 def image_to_bnw(image):
     return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+def apply_dilation(image):
+    kernel = np.ones((2,2), np.uint8)
+    return cv2.dilate(image, kernel, iterations=3)
+
+def apply_erosion(image):
+    kernel = np.ones((2,2), np.uint8)
+    return cv2.erode(image, kernel, iterations=2)
+
+def apply_denoise(image):
+    return cv2.fastNlMeansDenoising(image, 21, 7)
+
+def apply_thresholding(image):
+    return cv2.adaptiveThreshold(image,255,cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV,11,2)
 
 def smoothing_median_blur(image, max_kernel_length = 10):
     for i in range(1, max_kernel_length, 2):
@@ -35,8 +50,8 @@ def get_regions(contours):
     for contour in contours:
         (x, y, w, h) = cv2.boundingRect(contour)
         
-        # Asumo que si el área de un rectángulo es menor de 500px² se trata de una agrupación de puntos en vez de una letra
-        if get_area(w, h) > 500:
+        # Asumo que si el área de un rectángulo es menor de 300 se trata de una agrupación de puntos en vez de una letra
+        if get_area(w, h) > 300:
             regions.append((x, y, w, h))
 
     return regions

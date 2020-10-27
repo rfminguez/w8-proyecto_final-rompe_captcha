@@ -39,8 +39,11 @@ def main():
 
         image = tb.get_image(captcha_image_filename)
         image_bnw = tb.image_to_bnw(image.copy())
-        smoothed_image = tb.smoothing_median_blur(image_bnw)
-        thresholded_image = tb.image_thresholding(smoothed_image)
+        dilation_image = tb.apply_dilation(image_bnw)
+        erosion_image = tb.apply_erosion(dilation_image)
+        denoise_image = tb.apply_denoise(erosion_image)
+        thresholded_image = tb.apply_thresholding(denoise_image)
+
         contours = tb.get_contours(thresholded_image)
 
         # Una región es el rectángulo que envuelve cada letra

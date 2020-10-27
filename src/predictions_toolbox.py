@@ -23,8 +23,11 @@ def plot_individual_image(image, letters_list):
 def transform_captcha_image(image):
     # Hago las mismas transformaciones que en el script `extraer_letras.py` y el notebook `01 - Creacion Dataset Letras`:
     image_bnw = etb.image_to_bnw(image.copy())
-    smoothed_image = etb.smoothing_median_blur(image_bnw)
-    thresholded_image = etb.image_thresholding(smoothed_image)
+    dilation_image = etb.apply_dilation(image_bnw)
+    erosion_image = etb.apply_erosion(dilation_image)
+    denoise_image = etb.apply_denoise(erosion_image)
+    thresholded_image = etb.apply_thresholding(denoise_image)
+
     return thresholded_image
 
 
