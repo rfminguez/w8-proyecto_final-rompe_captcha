@@ -4,4 +4,3 @@ __pycache__
 .vscode
 *.hdf5
 *.dat
-test/
