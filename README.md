@@ -5,7 +5,7 @@ Un `captcha` es una herramienta que se utiliza para distinguir si un usuario es 
 
 Este es el proyecto final para el bootcamp de Data de IronHack. El objetivo es extraer el texto oculto en imágenes `captcha` usando técnicas de análisis de imagen y Machine Learning (concretamente Redes Neuronales Convolucionales). 
 
-Se trata de una PoC, limitada en el alcance para reducir la complejidad del problema y hacerla abarcable en una semana:
+Se trata de una PoC, limitada en el alcance para reducir la complejidad del problema y hacerla abarcable en una semana de trabajo:
 * resolver captchas de 4 caracteres.
 * letras mayúsculas y números entre 1 y 9 (el "0" es difícil de distinguir de una "O" mayúscula incluso para el ojo humano). En total son 36 caracteres. 
 * imágenes generadas con el módulo `capcha` de Python (`https://pypi.org/project/captcha/`).
@@ -86,6 +86,8 @@ https://www.novatec-gmbh.de/en/blog/deep-learning-for-end-to-end-captcha-solving
 https://medium.com/towards-artificial-intelligence/breaking-captcha-using-machine-learning-in-0-05-seconds-9feefb997694
 
 http://ceur-ws.org/Vol-1885/93.pdf
+
+https://www.lancaster.ac.uk/staff/wangz3/publications/ccs18.pdf
 * Documentación OpenCV y pytesseract:
 
 https://nanonets.com/blog/ocr-with-tesseract/
